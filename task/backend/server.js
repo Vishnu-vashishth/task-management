@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use( cors({
-  origin: true,
+  origin: 'https://tasks-y7av.onrender.com/',
   credentials: true,
 }));
 
