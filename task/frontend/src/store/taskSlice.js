@@ -140,7 +140,7 @@ export const createTaskApi = createAsyncThunk(
     'task/createTask',
     async (data, { rejectWithValue }) => {
         try {
-            const { data: task } = await axios.post('https://taskmanagement-7yjx.onrender.com/api/createTask', data, { withCredentials: true })
+            const { data: task } = await axios.post('https://taskmanagement-7yjx.onrender.com/api/task/createTask', data, { withCredentials: true })
             return task.task
         } catch (error) {
             return rejectWithValue(error.message)

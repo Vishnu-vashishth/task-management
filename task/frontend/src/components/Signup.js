@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 const Signup = () => {
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -22,22 +23,20 @@ const Signup = () => {
     e.preventDefault();
 
     // Perform the API post request with formData
-    fetch('https://taskmanagement-7yjx.onrender.com/api/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        toast.success('Signup Success');
-        navigate('/login')
-      })
+    axios
+      .post('https://taskmanagement-7yjx.onrender.com/api/user/signup', formData) 
+      .then((response) => {
+
+        // If successful, we should redirect the user to login page
+        toast.success('Signup successful. Please login.');
+        navigate('/login');
+      }
+      )
       .catch((error) => {
-        // Handle errors
-        console.error(error);
-      });
+        toast.error(error.response.data.message);
+      }
+      );
+
   };
 
   return (
@@ -58,7 +57,7 @@ const Signup = () => {
                 type="text"
                 name="firstName"
                 placeholder="Jane"
-                value={formData.firstName}
+                value={formData.firstname}
                 onChange={handleChange}
                 required
               />
@@ -76,7 +75,7 @@ const Signup = () => {
                 type="text"
                 name="lastName"
                 placeholder="Doe"
-                value={formData.lastName}
+                value={formData.lastname}
                 onChange={handleChange}
                 required
               />
