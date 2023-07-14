@@ -55,7 +55,7 @@ const Signup = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 id="grid-first-name"
                 type="text"
-                name="firstName"
+                name="firstname"
                 placeholder="Jane"
                 value={formData.firstname}
                 onChange={handleChange}
@@ -73,7 +73,7 @@ const Signup = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-last-name"
                 type="text"
-                name="lastName"
+                name="lastname"
                 placeholder="Doe"
                 value={formData.lastname}
                 onChange={handleChange}

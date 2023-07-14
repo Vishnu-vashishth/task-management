@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/authSlice';
+import { useSelector } from 'react-redux';
 const logo = 'https://www.superceuticals.in/src/img/logo.png';
 
 const Sidebar = (props) => {
+    const isAuth = useSelector(state => state.auth.isAuth);
+    
     const dispatch = useDispatch();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -51,7 +54,7 @@ const Sidebar = (props) => {
                         </button>
                         <div className="flex items-center ml-2 md:mr-24">
                             <img src={logo} className="h-8 mr-3" alt="FlowBite Logo" />
-                            
+
                         </div>
                     </div>
                 </div>
@@ -136,17 +139,28 @@ const Sidebar = (props) => {
                                 <span className="flex-1 ml-3 whitespace-nowrap">All Tasks</span>
                             </Link>
                         </li>
+                        {isAuth ? (
+                            <li>
+                                <div
+                                    onClick={() => dispatch(logout())}
+                                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                                >
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Log Out</span>
+                                </div>
+                            </li>
+                        ) : (
+                            <li>
+                                <Link
+                                    to="/login"
+                                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                                >
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Log In</span>
+                                </Link>
+                            </li>
+                        )}
 
-                        <li>
-                            <div
-                                
-                               onClick={() => dispatch(logout())}
-                                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                            >
-                               
-                                <span className="flex-1 ml-3 whitespace-nowrap">Log Out </span>
-                            </div>
-                        </li>
+
+
                     </ul>
                 </div>
             </aside>
