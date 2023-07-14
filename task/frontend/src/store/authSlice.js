@@ -60,14 +60,7 @@ export const login = createAsyncThunk(
     'auth/login',
     async (data, { rejectWithValue }) => {
         try {
-            const res = await fetch('https://taskmanagement-7yjx.onrender.com/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-                credentials: 'include',
-            })
+            const res = await axios.post('https://taskmanagement-7yjx.onrender.com/api/auth/login', data, { withCredentials: true })
              
             return res.data
         } catch (err) {
