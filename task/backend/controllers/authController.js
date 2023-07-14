@@ -35,13 +35,7 @@ const login = async (req, res) => {
 
         const token = req.cookies.token;
         const body = req.body;
-        // if (!body.email && token) {
-        //     const decoded = jwt.verify(token, process.env.SECRET_KEY)
-        //     const user = await User.findById(decoded.id).select('-password')
-        //     if (user) {
-        //         return res.status(200).json({ user: user })
-        //     }
-        // }
+
 
 
         if (token) {
@@ -61,11 +55,12 @@ const login = async (req, res) => {
         const { email, password } = data;
         const user = await User.findOne({ email: email })
         if (!user) return res.status(400).json({ error: "Email or password is wrong" })
-        const isMatch =  bcrypt.compare(password, user.password)
+        const isMatch = bcrypt.compare(password, user.password)
         if (isMatch) {
 
             const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY)
-            res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24  })
+            console.log(token)
+            res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24,   sameSite: 'none', secure: true })
             const { firstname, lastname, email, _id } = user;
             return res.status(200).json({ user: { firstname, lastname, email, _id }, message: "Logged in successfully !" })
         }
