@@ -8,13 +8,14 @@ const { Server } = require('socket.io');
 require('dotenv').config();
 
 const app = express();
+app.use( cors({
+  origin: true,
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
-app.use( cors({
-  origin: 'https://taskmanagement-7yjx.onrender.com',
-  credentials: true,
-}));
 
 connectDB();
 
