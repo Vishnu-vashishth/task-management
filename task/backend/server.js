@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('*', cors({
-  origin: true,
+  origin: 'https://tasks-y7av.onrender.com/',
   credentials: true,
 }));
 
@@ -21,7 +21,7 @@ connectDB();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: true,
+    origin: 'https://tasks-y7av.onrender.com/',
     credentials: true,
   }
 });
