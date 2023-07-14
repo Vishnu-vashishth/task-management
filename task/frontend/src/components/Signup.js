@@ -24,7 +24,7 @@ const Signup = () => {
 
     // Perform the API post request with formData
     axios
-      .post('https://taskmanagement-7yjx.onrender.com/api/user/signup', formData) 
+      .post('https://taskmanagement-7yjx.onrender.com/api/user/signup', formData, { withCredentials: true }) 
       .then((response) => {
 
         // If successful, we should redirect the user to login page
