@@ -76,8 +76,8 @@ export const logout = createAsyncThunk(
     'auth/logout',
     async (_, { rejectWithValue }) => {
         try {
-            const res = await axios.post('https://taskmanagement-7yjx.onrender.com/api/auth/logout', null, { withCredentials: true })
-            toast.success('Logout Success')
+            const res = await axios.post('https://taskmanagement-7yjx.onrender.com/api/auth/logout',{}, { withCredentials: true })
+         
             return res.data
 
         } catch (err) {
